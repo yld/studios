@@ -42,4 +42,8 @@ group :development, :test do
   gem "rspec-rails", "~> 7.0.0"
   gem "factory_bot_rails"
   gem "faker"
+  gem 'pry'
 end
+
+# silence Ruby warning, remove for Ruby 3.5
+gem "ostruct", "~> 0.6.0"
