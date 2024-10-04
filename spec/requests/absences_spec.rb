@@ -27,7 +27,7 @@ RSpec.describe "Absences", type: :request do
       expect(JSON.parse(response.body, symbolize_names: true)).to eq(
         [
           {
-            " studio_id": studio.id,
+            "studio_id": studio.id,
             "absences": [
               {
                 "start_date": AbsencesController::RENTAL_START_DATE.to_date.to_s,

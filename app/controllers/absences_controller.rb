@@ -24,6 +24,6 @@ class AbsencesController < ApplicationController
       start_date = stay.end_date
     end
     absences << { start_date: start_date, end_date:  }
-    {  studio_id: studio.id, absences: }
+    { studio_id: studio.id, absences: }
   end
 end
