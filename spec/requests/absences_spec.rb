@@ -24,27 +24,7 @@ RSpec.describe "Absences", type: :request do
     it "returns http success" do
       get "/absences", as: :json
       expect(response).to have_http_status(:success)
-      # expect(parsed_response).to eq(
-      #   [
-      #     {
-      #       "studio_id": studio.id,
-      #       "absences": [
-      #         {
-      #           "start_date": AbsencesController::RENTAL_START_DATE.to_date.to_s,
-      #           "end_date": (first_stay.start_date + 1.day).to_date.to_s
-      #         },
-      #         {
-      #           "start_date": first_stay.end_date.to_date.to_s,
-      #           "end_date": (second_stay.start_date + 1.day).to_date.to_s
-      #         },
-      #         {
-      #           "start_date": second_stay.end_date.to_date.to_s,
-      #           "end_date": AbsencesController::RENTAL_END_DATE.to_date.to_s
-      #         }
-      #       ]
-      #     }
-      #   ]
-      # )
+      # TODO: add one more expectatin verifying expected method was called with expected agument (or something else...)
     end
   end
 
@@ -66,10 +46,14 @@ RSpec.describe "Absences", type: :request do
         ]
       }
     end
+    before do
+      allow(UpdateAbsencesService).to receive(:call).and_call_original
+    end
 
     it "returns http success" do
       post "/absences", as: :json, params: payload
       expect(response).to have_http_status(:created)
+      expect(UpdateAbsencesService).to have_received(:call)  # TODO: specify arguments
     end
   end
 end

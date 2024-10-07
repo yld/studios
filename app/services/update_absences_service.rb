@@ -1,3 +1,6 @@
+# WARNING: this code is maybe ignoring x+1 / x-1 date but nothing was specified.
+# it would be easy to fix playing with the specs
+
 class UpdateAbsencesService
   prepend SimpleCommand
 
@@ -58,7 +61,7 @@ class UpdateAbsencesService
   def update_absences
     ActiveRecord::Base.transaction do
       @absences.each do |hash|
-        # here we embrace the 4 use cases with a slow algo
+        # here we embrace 4 use cases with a working slow algo
         clear_included_stays(hash)
         split_overlapping_stay(hash)
         shrink_stay_start(hash)

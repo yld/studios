@@ -13,16 +13,21 @@ class AbsencesController < ApplicationController
   def create
     success = true
 
-    absences = create_params[:studios].map do |hash|
+    feedback = create_params[:studios].map do |hash|
       call = UpdateAbsencesService.call(hash[:studio_id], hash[:absences])
       success & call.success?
-      # in case of failure, we may rollback any changes and return an error and switch to index hash
-      # transaction should be around this loop
-      studio_absences(call.result, RENTAL_START_DATE, RENTAL_END_DATE)
-      # here we could grab service error and display them
+      if call.success?
+        studio_absences(call.result, RENTAL_START_DATE, RENTAL_END_DATE)
+      else
+        # TODO: tests this use case
+        {
+          studio_id: result.studio.id,
+          errors: result.errors.full_messages.to_sentence
+        }
+      end
     end
 
-    render json: absences, status: success ? :created : :bad_request
+    render json: feedback, status: success ? :created : :bad_request
   end
 
   private

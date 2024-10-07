@@ -55,13 +55,9 @@ RSpec.describe UpdateAbsencesService do
 
   subject(:call) { described_class.call(studio.id, absences) }
 
-  shared_examples 'a success' do
-    it { expect(call).to be_succcess }
-  end
-
-  shared_examples 'a failure' do
-    it {  expect(call).to be_failure }
-  end
+  # shared_examples 'a success' do
+  #   it { expect(call).to be_succcess }
+  # end
 
   describe '#call' do
     context 'when an absence outreachs start_date' do
