@@ -47,3 +47,5 @@ end
 
 # silence Ruby warning, remove for Ruby 3.5
 gem "ostruct", "~> 0.6.0"
+
+gem "simple_command", "~> 1.0"
